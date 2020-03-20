@@ -3,73 +3,74 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.hilosrelevo;
+package com.unicundi.hilosrelevo;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sql.rowset.spi.SyncResolver;
 
 /**
  *
  * @author holman
  */
-public class Corredor1 extends Thread {
-
+public class Corredor2 extends Thread {
+    
     //declaracion de atributos para colorear los corredores
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_RESET = "\u001B[0m";
-    //declaracion de variables 
+    //declaracion de variables
     private String pista = "";
-    private int resto = 0, pasos = 0, contador = 0, posicion;
+    private int resto = 0, pasos = 33, contador = 33, posicion;
     private String equipo;
     private String nombre;
     private Equipo obj;
-
+    
     //metodo constructor
-    public Corredor1(String nombre, int posicion, Equipo obj) {
+    public Corredor2(String nombre, int posicion, Equipo obj) {
         this.nombre = nombre;
         this.posicion = posicion;
         this.obj = obj;
     }
-
+    
     //metodo para correr el hilo
     @Override
     public void run() {
-        corredor1();
+        corredor2();
     }
-
+    
     //metodo de logica del hilo
-    public synchronized void corredor1() {
+    public synchronized void corredor2() {
         //bucle para definir el tamaño de lo que debe correr el primer corredor
-        while (contador < 33) {
+        while (contador < 66) {
             try {
                 pasos = (int) Math.floor(Math.random() * 3 + 1);//operacion de numero ramdom
                 contador += pasos;//suma los pasos al contador de pasos
                 //validacion para que no se pase de la cantidad de pasos limites
-                if (contador >= 33) {
-                    contador = 33;
+                if (contador >= 66) {
+                    contador = 66;
                 }
                 //bucle para imprimir en pantalla el "piso" de la pista atras del corredor
-                for (int i = 1; i < contador; i++) {
+                for (int i = 34; i < contador; i++) {
                     pista += "_";
                 }
                 pista += nombre;
-                resto = 32 - contador;
+                resto = 65 - contador;
                 //bucle para imprimir en pantalla el "piso" de la pista adelante del corredor
                 for (int i = 0; i <= resto; i++) {
                     pista += "_";
                 }
-                System.err.println(ANSI_YELLOW + "\n" + pista + ANSI_GREEN + nombre + "________________________________" + ANSI_BLUE + nombre + "__________________________________");
+                System.out.println(ANSI_YELLOW + "\n________________________________" + nombre + ANSI_GREEN + pista + ANSI_BLUE + nombre + "__________________________________");
                 pista = "";
+
                 Thread.sleep(500);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Corredor1.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
 
+    }
+    
     //metodos getters and setters
     public String getEquipo() {
         return equipo;
@@ -119,20 +120,20 @@ public class Corredor1 extends Thread {
         this.contador = contador;
     }
 
-    public int getPosicion() {
-        return posicion;
-    }
-
-    public void setPosicion(int posicion) {
-        this.posicion = posicion;
-    }
-
     public Equipo getObj() {
         return obj;
     }
 
     public void setObj(Equipo obj) {
         this.obj = obj;
+    }
+
+    public int getPocision() {
+        return posicion;
+    }
+
+    public void setPocision(int pocision) {
+        this.posicion = pocision;
     }
 
 }

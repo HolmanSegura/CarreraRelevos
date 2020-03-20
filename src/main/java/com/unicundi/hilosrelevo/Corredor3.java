@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.hilosrelevo;
+package com.unicundi.hilosrelevo;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,8 +12,8 @@ import java.util.logging.Logger;
  *
  * @author holman
  */
-public class Corredor2 extends Thread {
-    
+public class Corredor3 extends Thread {
+
     //declaracion de atributos para colorear los corredores
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_YELLOW = "\u001B[33m";
@@ -21,56 +21,58 @@ public class Corredor2 extends Thread {
     public static final String ANSI_RESET = "\u001B[0m";
     //declaracion de variables
     private String pista = "";
-    private int resto = 0, pasos = 33, contador = 33, posicion;
+    private int resto = 0, pasos = 66, contador = 66, posicion;
     private String equipo;
     private String nombre;
     private Equipo obj;
-    
+
     //metodo constructor
-    public Corredor2(String nombre, int posicion, Equipo obj) {
+    public Corredor3(String nombre, int posicion, Equipo obj) {
         this.nombre = nombre;
         this.posicion = posicion;
         this.obj = obj;
     }
-    
+
     //metodo para correr el hilo
     @Override
     public void run() {
-        corredor2();
+        corredor3();
     }
-    
+
     //metodo de logica del hilo
-    public synchronized void corredor2() {
+    public synchronized void corredor3() {
         //bucle para definir el tamaño de lo que debe correr el primer corredor
-        while (contador < 66) {
+        while (contador < 100) {
             try {
                 pasos = (int) Math.floor(Math.random() * 3 + 1);//operacion de numero ramdom
                 contador += pasos;//suma los pasos al contador de pasos
                 //validacion para que no se pase de la cantidad de pasos limites
-                if (contador >= 66) {
-                    contador = 66;
+                if (contador >= 100) {
+                    contador = 100;
                 }
                 //bucle para imprimir en pantalla el "piso" de la pista atras del corredor
-                for (int i = 34; i < contador; i++) {
+                for (int i = 66; i < contador; i++) {
                     pista += "_";
                 }
                 pista += nombre;
-                resto = 65 - contador;
+                resto = 99 - contador;
                 //bucle para imprimir en pantalla el "piso" de la pista adelante del corredor
                 for (int i = 0; i <= resto; i++) {
                     pista += "_";
                 }
-                System.out.println(ANSI_YELLOW + "\n________________________________" + nombre + ANSI_GREEN + pista + ANSI_BLUE + nombre + "__________________________________");
+                System.out.println(ANSI_YELLOW + "\n________________________________" + nombre + ANSI_GREEN + "________________________________" + nombre + ANSI_BLUE + pista);
                 pista = "";
-
                 Thread.sleep(500);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Corredor1.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+            if (contador == 100) {
+                System.out.println("Gano el equipo " + nombre);
 
+            }
+        }
     }
-    
+
     //metodos getters and setters
     public String getEquipo() {
         return equipo;
